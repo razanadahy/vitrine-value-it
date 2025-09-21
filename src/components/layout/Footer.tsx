@@ -7,39 +7,31 @@ export default function Footer() {
 
   const footerSections = [
     {
-      title: "Solutions",
+      title: "Fonctionnalités",
       links: [
-        { name: "E-commerce Intelligence", href: "/solutions/ecommerce" },
-        { name: "Retail Pricing", href: "/solutions/retail" },
-        { name: "API Integration", href: "/solutions/api" },
-        { name: "Custom Solutions", href: "/solutions/custom" },
+        { name: "Web Scraping", href: "/features#scraping" },
+        { name: "Tableaux de Bord Temps Réel", href: "/features#dashboards" },
+        { name: "Alertes de Prix", href: "/features#alerts" },
+        { name: "Analyses", href: "/features#analytics" },
+        { name: "Intelligence E-commerce", href: "/features#ecommerce" },
+        { name: "Tarification Retail", href: "/features#retail" },
       ]
     },
     {
-      title: "Features",
+      title: "Entreprise",
       links: [
-        { name: "Web Scraping", href: "/features/scraping" },
-        { name: "Real-time Dashboards", href: "/features/dashboards" },
-        { name: "Price Alerts", href: "/features/alerts" },
-        { name: "Analytics", href: "/features/analytics" },
-      ]
-    },
-    {
-      title: "Company",
-      links: [
-        { name: "About Us", href: "/about" },
-        { name: "Careers", href: "/careers" },
+        { name: "À propos", href: "/about" },
+        { name: "Carrières", href: "/careers" },
         { name: "Contact", href: "/contact" },
-        { name: "Blog", href: "/blog" },
       ]
     },
     {
-      title: "Legal",
+      title: "Légal",
       links: [
-        { name: "Privacy Policy", href: "/privacy" },
-        { name: "Terms of Service", href: "/terms" },
-        { name: "Cookie Policy", href: "/cookies" },
-        { name: "Security", href: "/security" },
+        { name: "Politique de Confidentialité", href: "/privacy" },
+        { name: "Conditions d'Utilisation", href: "/terms" },
+        { name: "Politique de Cookies", href: "/cookies" },
+        { name: "Sécurité", href: "/security" },
       ]
     }
   ]
@@ -50,13 +42,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-brand rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">V</span>
-              </div>
-              <span className="font-bold text-xl text-gray-900">
-                Value<span className="text-gradient">IT</span>
-              </span>
+            <Link href="/" className="flex items-center mb-4">
+              <img
+                src="/value-it-logo.svg"
+                alt="Value-IT"
+                className="h-8 w-auto"
+              />
             </Link>
             <p className="text-gray-600 mb-6 max-w-sm">
               {COMPANY_INFO.description}
@@ -125,14 +116,14 @@ export default function Footer() {
         <div className="border-t border-gray-200 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-600 text-sm mb-4 md:mb-0">
-              © {currentYear} {COMPANY_INFO.name}. All rights reserved.
+              © {currentYear} {COMPANY_INFO.name}. Tous droits réservés.
             </div>
             
             {/* Trust Indicators */}
             <div className="flex items-center space-x-6 text-sm text-gray-500">
               <div className="flex items-center space-x-1">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span>99.9% Uptime</span>
+                <span>99.9% Disponibilité</span>
               </div>
               <div className="flex items-center space-x-1">
                 <div className="w-2 h-2 bg-blue-500 rounded-full" />
@@ -140,7 +131,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-1">
                 <div className="w-2 h-2 bg-purple-500 rounded-full" />
-                <span>GDPR Compliant</span>
+                <span>Conforme RGPD</span>
               </div>
             </div>
           </div>

@@ -2,7 +2,7 @@
 export const COMPANY_INFO = {
   name: "Value-IT",
   tagline: "Competitive Price Intelligence Made Simple",
-  description: "Leading competitive price intelligence SaaS platform analyzing 10M+ prices daily",
+  description: "Plateforme SaaS leader en intelligence tarifaire concurrentielle analysant plus de 10M de prix quotidiennement",
   founded: "2018",
   headquarters: "Madagascar",
   employees: "50+",
@@ -18,11 +18,10 @@ export const COMPANY_INFO = {
 
 // Navigation Menu
 export const NAVIGATION = [
-  { name: "Solutions", href: "/solutions" },
-  { name: "Features", href: "/features" },
-  { name: "Pricing", href: "/pricing" },
-  { name: "About", href: "/about" },
-  { name: "Blog", href: "/blog" }
+  { name: "Accueil", href: "/" },
+  { name: "Solutions", href: "/features" },
+  { name: "Tarifs", href: "/pricing" },
+  { name: "À propos", href: "/about" }
 ]
 
 // Features List

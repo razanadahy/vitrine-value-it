@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import FeaturesHero from "@/components/sections/FeaturesHero"
 import CoreFeatures from "@/components/sections/CoreFeatures"
+import TargetAudience from "@/components/sections/TargetAudience"
 import TechnicalFeatures from "@/components/sections/TechnicalFeatures"
 import IntegrationFeatures from "@/components/sections/IntegrationFeatures"
 import SecurityFeatures from "@/components/sections/SecurityFeatures"
@@ -16,6 +17,7 @@ export default function FeaturesPage() {
     <div className="min-h-screen bg-white">
       <FeaturesHero />
       <CoreFeatures />
+      <TargetAudience />
       <TechnicalFeatures />
       <IntegrationFeatures />
       <SecurityFeatures />

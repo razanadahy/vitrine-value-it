@@ -63,20 +63,3 @@ export interface CaseStudy {
   logo: string
   testimonial?: Testimonial
 }
-
-export interface BlogPost {
-  id: string
-  title: string
-  slug: string
-  excerpt: string
-  content: string
-  publishedAt: string
-  author: {
-    name: string
-    avatar: string
-    bio: string
-  }
-  tags: string[]
-  readTime: number
-  featured?: boolean
-}

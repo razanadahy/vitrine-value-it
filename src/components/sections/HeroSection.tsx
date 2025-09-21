@@ -7,35 +7,38 @@ import { Badge } from "@/components/ui/badge"
 import MetricsCounter from "@/components/interactive/MetricsCounter"
 // import { COMPANY_INFO } from "@/lib/constants"
 import Link from "next/link"
+import { useDemandeDevis } from "@/contexts/DemandeDevisContext"
 
 export default function HeroSection() {
+  const { openModal } = useDemandeDevis()
+
   const metrics = [
     {
-      title: "Prices Analyzed Daily",
+      title: "Prix Analysés par Jour",
       value: 10000000,
       suffix: "+",
-      description: "Real-time price monitoring",
+      description: "Surveillance des prix en temps réel",
       icon: <TrendingUp className="w-5 h-5" />
     },
     {
-      title: "Uptime Guarantee",
+      title: "Disponibilité Garantie",
       value: 99.9,
       suffix: "%",
-      description: "Always available",
+      description: "Toujours disponible",
       icon: <BarChart3 className="w-5 h-5" />
     },
     {
-      title: "Countries Covered",
-      value: 15,
+      title: "Années d'Expérience",
+      value: 6,
       suffix: "+",
-      description: "Global reach",
+      description: "Expertise dans le domaine",
       icon: <Globe className="w-5 h-5" />
     },
     {
-      title: "Happy Clients",
+      title: "Clients Satisfaits",
       value: 200,
       suffix: "+",
-      description: "Trusted by businesses",
+      description: "Confiance des entreprises",
       icon: <Users className="w-5 h-5" />
     }
   ]
@@ -63,7 +66,7 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <Badge variant="secondary" className="bg-blue-100 text-blue-700 hover:bg-blue-200">
-                🚀 Trusted by 200+ businesses worldwide
+                🚀 Confiance de plus de 200 entreprises dans le monde
               </Badge>
             </motion.div>
 
@@ -75,13 +78,13 @@ export default function HeroSection() {
               className="space-y-4"
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-                <span className="text-gray-900">Competitive</span>{" "}
-                <span className="text-gradient">Price Intelligence</span>{" "}
-                <span className="text-gray-900">Made Simple</span>
+                <span className="text-gradient">Intelligence Tarifaire</span>{" "}
+                <span className="text-gray-900">Compétitive</span>{" "}
+                <span className="text-gray-900">Simplifiée</span>
               </h1>
               <p className="text-xl text-gray-600 max-w-2xl">
-                Monitor competitors, optimize pricing strategies, and boost your margins with our 
-                AI-powered platform. Analyzing <strong>10M+ prices daily</strong> across 15+ countries.
+                Surveillez vos concurrents, optimisez vos stratégies de prix et augmentez vos marges avec notre
+                plateforme propulsée par l'IA. Analyse de <strong>plus de 10M de prix par jour</strong> dans plus de 15 pays.
               </p>
             </motion.div>
 
@@ -92,16 +95,14 @@ export default function HeroSection() {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <Link href="/demo">
-                <Button size="lg" className="bg-gradient-brand hover:bg-gradient-brand-dark group">
-                  Start Free Trial
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
+              <Button size="lg" className="bg-gradient-brand hover:bg-gradient-brand-dark group" onClick={openModal}>
+                Commencer l'Essai Gratuit
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
               <Link href="/demo">
                 <Button size="lg" variant="outline" className="group">
                   <Play className="mr-2 w-4 h-4" />
-                  Watch Demo
+                  Voir la Démo
                 </Button>
               </Link>
             </motion.div>
@@ -115,15 +116,15 @@ export default function HeroSection() {
             >
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span>SOC 2 Type II Certified</span>
+                <span>Certifié SOC 2 Type II</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-blue-500 rounded-full" />
-                <span>GDPR Compliant</span>
+                <span>Conforme RGPD</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-purple-500 rounded-full" />
-                <span>Enterprise Ready</span>
+                <span>Prêt pour l'Entreprise</span>
               </div>
             </motion.div>
           </motion.div>
@@ -139,7 +140,7 @@ export default function HeroSection() {
               {/* Simulated Dashboard */}
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-gray-900">Price Intelligence Dashboard</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">Tableau de Bord Intelligence Tarifaire</h3>
                   <div className="flex space-x-2">
                     <div className="w-3 h-3 bg-red-400 rounded-full" />
                     <div className="w-3 h-3 bg-yellow-400 rounded-full" />
@@ -163,11 +164,11 @@ export default function HeroSection() {
                 {/* Mock Metrics */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-white/50 rounded-lg p-3">
-                    <div className="text-sm text-gray-600">Avg. Price Drop</div>
+                    <div className="text-sm text-gray-600">Baisse Moy. des Prix</div>
                     <div className="text-xl font-bold text-green-600">-12.3%</div>
                   </div>
                   <div className="bg-white/50 rounded-lg p-3">
-                    <div className="text-sm text-gray-600">Monitored SKUs</div>
+                    <div className="text-sm text-gray-600">SKUs Surveillés</div>
                     <div className="text-xl font-bold text-blue-600">2,847</div>
                   </div>
                 </div>
@@ -181,7 +182,7 @@ export default function HeroSection() {
               >
                 <div className="flex items-center space-x-2">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                  <span className="text-xs font-medium">Live Data</span>
+                  <span className="text-xs font-medium">Données en Direct</span>
                 </div>
               </motion.div>
 
@@ -191,31 +192,13 @@ export default function HeroSection() {
                 className="absolute -bottom-4 -left-4 bg-white rounded-lg shadow-lg p-3 border"
               >
                 <div className="text-xs text-gray-600">
-                  <div className="font-medium">Price Alert</div>
-                  <div className="text-green-600">Competitor dropped 15%</div>
+                  <div className="font-medium">Alerte Prix</div>
+                  <div className="text-green-600">Concurrent a baissé de 15%</div>
                 </div>
               </motion.div>
             </div>
           </motion.div>
         </div>
-
-        {/* Metrics Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
-          className="mt-20"
-        >
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Trusted by businesses worldwide
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Our platform processes millions of data points daily to give you the competitive edge you need
-            </p>
-          </div>
-          <MetricsCounter metrics={metrics} />
-        </motion.div>
       </div>
     </section>
   )

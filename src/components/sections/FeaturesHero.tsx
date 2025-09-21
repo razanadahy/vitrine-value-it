@@ -44,7 +44,7 @@ export default function FeaturesHero() {
             
             <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
               Toute la puissance de{" "}
-              <span className="bg-gradient-brand bg-clip-text text-transparent">
+              <span className="text-orange-500 font-bold">
                 Value-IT
               </span>
               {" "}en détail

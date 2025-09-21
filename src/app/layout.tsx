@@ -7,6 +7,8 @@ import AnalyticsProvider from "@/components/analytics/AnalyticsProvider";
 import ConsentBanner from "@/components/analytics/ConsentBanner";
 import { COMPANY_INFO } from "@/lib/constants";
 import { Suspense } from "react";
+import { DemandeDevisProvider } from "@/contexts/DemandeDevisContext";
+import DemandeDevisModal from "@/components/modals/DemandeDevisModal";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -83,15 +85,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">
-        <Suspense fallback={null}>
-          <AnalyticsProvider />
-        </Suspense>
-        <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
-        <ConsentBanner />
+        <DemandeDevisProvider>
+          <Suspense fallback={null}>
+            <AnalyticsProvider />
+          </Suspense>
+          <Header />
+          <main className="min-h-screen">
+            {children}
+          </main>
+          <Footer />
+          <ConsentBanner />
+          <DemandeDevisModal />
+        </DemandeDevisProvider>
       </body>
     </html>
   );

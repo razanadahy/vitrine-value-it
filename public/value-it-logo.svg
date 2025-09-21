@@ -1,0 +1,11 @@
+<svg width="280" height="60" viewBox="0 0 280 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- VALUE text -->
+  <text x="0" y="40" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700" fill="#ff8f1f">VALUE</text>
+
+  <!-- IT text -->
+  <text x="120" y="40" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700" fill="#070d23">IT</text>
+
+  <!-- Small text below -->
+  <text x="0" y="55" font-family="Inter, Arial, sans-serif" font-size="10" fill="#070d23">DU GROUPE</text>
+  <text x="65" y="55" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="600" fill="#070d23">OUTSOURCIA</text>
+</svg>
