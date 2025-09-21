@@ -205,25 +205,25 @@ export default function TechnicalFeatures() {
           <div className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
             <div className="grid md:grid-cols-4 gap-8 text-center">
               <div>
-                <div className="text-3xl font-bold bg-gradient-brand bg-clip-text text-transparent mb-2">
+                <div className="text-3xl font-bold text-orange-500 mb-2">
                   99.9%
                 </div>
                 <div className="text-gray-600">Uptime garanti</div>
               </div>
               <div>
-                <div className="text-3xl font-bold bg-gradient-brand bg-clip-text text-transparent mb-2">
+                <div className="text-3xl font-bold text-orange-500 mb-2">
                   10B+
                 </div>
                 <div className="text-gray-600">Requêtes/mois</div>
               </div>
               <div>
-                <div className="text-3xl font-bold bg-gradient-brand bg-clip-text text-transparent mb-2">
+                <div className="text-3xl font-bold text-orange-500 mb-2">
                   &lt; 100ms
                 </div>
                 <div className="text-gray-600">Temps de réponse</div>
               </div>
               <div>
-                <div className="text-3xl font-bold bg-gradient-brand bg-clip-text text-transparent mb-2">
+                <div className="text-3xl font-bold text-orange-500 mb-2">
                   ISO 27001
                 </div>
                 <div className="text-gray-600">Certifié sécurité</div>
