@@ -92,7 +92,7 @@ function FeatureCard({ feature, index }: FeatureCardProps) {
         y: -5,
         transition: { duration: 0.2, ease: "easeOut" }
       }}
-      className={`${sizeClasses[feature.size]} group`}
+      className={`${sizeClasses[feature.size as keyof typeof sizeClasses] || sizeClasses.medium} group`}
     >
       <Card className="h-full border-0 shadow-lg hover:shadow-2xl transition-all duration-500 bg-white/80 backdrop-blur-sm overflow-hidden relative">
         {/* Background gradient */}
