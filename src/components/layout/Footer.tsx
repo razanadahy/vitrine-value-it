@@ -44,7 +44,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center mb-4">
               <img
-                src="/value-it-logo.svg"
+                src="/value-it-logo.png"
                 alt="Value-IT"
                 className="h-8 w-auto"
               />
@@ -67,28 +67,6 @@ export default function Footer() {
                 <Phone className="w-4 h-4" />
                 <span>{CONTACT_INFO.phone}</span>
               </div>
-            </div>
-
-            {/* Social Links */}
-            <div className="flex space-x-4 mt-6">
-              <Link
-                href={CONTACT_INFO.social.linkedin}
-                className="text-gray-400 hover:text-blue-600 transition-colors duration-200"
-              >
-                <Linkedin className="w-5 h-5" />
-              </Link>
-              <Link
-                href={CONTACT_INFO.social.twitter}
-                className="text-gray-400 hover:text-blue-400 transition-colors duration-200"
-              >
-                <Twitter className="w-5 h-5" />
-              </Link>
-              <Link
-                href={CONTACT_INFO.social.github}
-                className="text-gray-400 hover:text-gray-900 transition-colors duration-200"
-              >
-                <Github className="w-5 h-5" />
-              </Link>
             </div>
           </div>
 

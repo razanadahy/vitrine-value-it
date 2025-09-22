@@ -39,7 +39,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <img
-              src="/value-it-logo.svg"
+              src="/value-it-logo.png"
               alt="Value-IT"
               className="h-8 w-auto"
             />
