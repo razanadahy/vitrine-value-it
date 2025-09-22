@@ -9,20 +9,30 @@ jobs:
   ftp-deploy:
     name: FTP Deploy
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Build Next.js
-        run: |
-          npm install
-          npm run build
-
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ftp.aris-cc.com
-          username: sitraka@aris-cc.com
-          password: saroobidy10289#
-          server-dir: /public_html/beta-valueit.aris-cc.com/
-          local-dir: ./out/
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build Next.js
+      run: npm run build
+      
+    - name: Deploy via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ftp.aris-cc.com
+        username: sitraka@aris-cc.com
+        password: saroobidy10289#
+        protocol: ftp
+        port: 21
+        server-dir: /public_html/beta-valueit.aris-cc.com/
+        local-dir: ./out/
