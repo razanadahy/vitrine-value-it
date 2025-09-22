@@ -4,77 +4,174 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # Permet le déclenchement manuel
+  workflow_dispatch:
 
 jobs:
-  ftp-deploy:
-    name: FTP Deploy
+  build-and-deploy:
+    name: Build and Deploy to cPanel
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
 
-    - name: Install dependencies
-      run: npm ci
+      - name: 📦 Install dependencies
+        run: npm ci
 
-    - name: Build Next.js
-      run: |
-        echo "Starting build..."
-        npm run build
-        echo "Build completed"
+      - name: 🏗️ Build Next.js Static Site
+        run: |
+          echo "Building Next.js static site..."
+          npm run build
+          echo "Build completed successfully"
 
-    - name: Verify build output
-      run: |
-        if [ -d "out" ]; then
-          echo "✅ Output directory exists"
-          echo "Files in out directory:"
-          ls -la out/
-          echo "Total files: $(find out -type f | wc -l)"
-        else
-          echo "❌ Output directory 'out' not found!"
-          exit 1
-        fi
+      - name: 📊 Verify build output
+        run: |
+          echo "==================================="
+          echo "Checking build output..."
+          echo "==================================="
 
-    - name: Create .htaccess
-      run: |
-        cat > out/.htaccess << 'EOF'
-        RewriteEngine On
-        RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteCond %{REQUEST_FILENAME} !-d
-        RewriteRule ^(.*)$ /index.html [L]
+          if [ ! -d "out" ]; then
+            echo "❌ ERROR: 'out' directory does not exist!"
+            echo "Build failed or output is in wrong location"
+            exit 1
+          fi
 
-        # Enable compression
-        <IfModule mod_deflate.c>
-          AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript
-        </IfModule>
+          if [ ! -f "out/index.html" ]; then
+            echo "❌ ERROR: index.html not found in out directory!"
+            ls -la out/
+            exit 1
+          fi
 
-             # Cache control
-        <IfModule mod_expires.c>
-          ExpiresActive On
-          ExpiresByType image/jpeg "access plus 1 year"
-          ExpiresByType image/png "access plus 1 year"
-          ExpiresByType text/css "access plus 1 month"
-          ExpiresByType application/javascript "access plus 1 month"
-        </IfModule>
-        EOF
-        echo "✅ .htaccess created"
+          echo "✅ Build output verified successfully"
+          echo "Found $(find out -type f | wc -l) files"
+          echo "Total size: $(du -sh out | cut -f1)"
 
-    - name: Deploy via FTP
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        protocol: ftp
-        port: 21
-        server-dir: /public_html/beta-valueit.aris-cc.com/
-        local-dir: ./out/
-        log-level: verbose
+      - name: 📝 Create Apache .htaccess
+        run: |
+          cat > out/.htaccess << 'EOF'
+          # Apache configuration for Next.js static export
+          Options -Indexes
 
+          # Enable URL rewriting
+          RewriteEngine On
+
+          # Redirect all requests to index.html for client-side routing
+          RewriteBase /
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteCond %{REQUEST_FILENAME} !-l
+          RewriteRule ^.*$ /index.html [L]
+
+          # Set proper MIME types
+          AddType text/html .html
+          AddType text/css .css
+          AddType application/javascript .js
+          AddType application/json .json
+          AddType image/svg+xml .svg
+          AddType image/webp .webp
+          AddType font/woff2 .woff2
+
+          # Enable GZIP compression
+          <IfModule mod_deflate.c>
+            AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+            AddOutputFilterByType DEFLATE application/javascript application/json
+            AddOutputFilterByType DEFLATE image/svg+xml
+          </IfModule>
+
+          # Browser caching
+          <IfModule mod_expires.c>
+            ExpiresActive On
+
+            # HTML - no cache
+            ExpiresByType text/html "access plus 0 seconds"
+
+            # CSS and JS - 1 month
+            ExpiresByType text/css "access plus 1 month"
+            ExpiresByType application/javascript "access plus 1 month"
+
+            # Images - 1 year
+            ExpiresByType image/jpeg "access plus 1 year"
+            ExpiresByType image/png "access plus 1 year"
+            ExpiresByType image/gif "access plus 1 year"
+            ExpiresByType image/webp "access plus 1 year"
+            ExpiresByType image/svg+xml "access plus 1 year"
+            ExpiresByType image/x-icon "access plus 1 year"
+
+            # Fonts - 1 year
+            ExpiresByType font/woff2 "access plus 1 year"
+            ExpiresByType font/woff "access plus 1 year"
+          </IfModule>
+
+          # Security headers
+          <IfModule mod_headers.c>
+            Header set X-Content-Type-Options "nosniff"
+            Header set X-Frame-Options "SAMEORIGIN"
+            Header set X-XSS-Protection "1; mode=block"
+            Header set Referrer-Policy "strict-origin-when-cross-origin"
+          </IfModule>
+          EOF
+          echo "✅ .htaccess file created"
+
+      - name: 🔍 List files to be deployed
+        run: |
+          echo "==================================="
+          echo "Files to be deployed:"
+          echo "==================================="
+          echo "HTML files:"
+          find out -name "*.html" -type f | head -10
+          echo ""
+          echo "Static assets:"
+          ls -la out/_next/static/ 2>/dev/null || echo "No _next/static directory"
+          echo ""
+          echo "Root files:"
+          ls -la out/ | head -20
+
+      - name: 🚀 Deploy to cPanel via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          port: 21
+          local-dir: ./out/
+          server-dir: /public_html/beta-valueit.aris-cc.com/
+          dangerous-clean-slate: true  # Nettoie le dossier avant déploiement
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.next/**
+            **/.env*
+          log-level: verbose
+
+      - name: ✅ Deployment Summary
+        if: success()
+        run: |
+          echo "==================================="
+          echo "✅ Deployment Successful!"
+          echo "==================================="
+          echo "🌐 Site URL: https://beta-valueit.aris-cc.com/"
+          echo "📅 Deployed at: $(date)"
+          echo "📝 Commit: ${{ github.sha }}"
+          echo "🌿 Branch: ${{ github.ref_name }}"
+          echo "==================================="
+
+      - name: ❌ Deployment Failed
+        if: failure()
+        run: |
+          echo "==================================="
+          echo "❌ Deployment Failed!"
+          echo "==================================="
+          echo "Please check:"
+          echo "1. GitHub Secrets are configured correctly"
+          echo "2. FTP credentials are valid"
+          echo "3. Server path is correct"
+          echo "4. Build output exists in 'out' directory"
+          echo "==================================="
