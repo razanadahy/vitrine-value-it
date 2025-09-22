@@ -23,6 +23,6 @@ jobs:
         with:
           server: ftp.aris-cc.com
           username: sitraka@aris-cc.com
-          password: ${{ secrets.FTP_PASSWORD }}
+          password: saroobidy10289
           server-dir: /public_html/beta-valueit.aris-cc.com
           local-dir: ./out
