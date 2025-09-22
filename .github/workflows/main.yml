@@ -30,8 +30,8 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ftp.aris-cc.com
-        username: sitraka@aris-cc.com
-        password: saroobidy10289#
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
         protocol: ftp
         port: 21
         server-dir: /public_html/beta-valueit.aris-cc.com/
