@@ -25,4 +25,4 @@ jobs:
           username: sitraka@aris-cc.com
           password: saroobidy10289
           server-dir: /public_html/beta-valueit.aris-cc.com
-          local-dir: ./out
+          local-dir: ./out/
