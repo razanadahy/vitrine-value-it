@@ -56,8 +56,8 @@ export default function Header() {
                   className={cn(
                     "font-medium transition-colors duration-200 relative group",
                     isActive
-                      ? "text-orange-500"
-                      : "text-gray-700 hover:text-orange-500"
+                      ? "text-gradient"
+                      : "text-gray-700 hover:text-gradient"
                   )}
                 >
                   {item.name}
@@ -115,8 +115,8 @@ export default function Header() {
                     className={cn(
                       "block py-2 font-medium transition-colors duration-200",
                       isActive
-                        ? "text-orange-500"
-                        : "text-gray-700 hover:text-orange-500"
+                        ? "text-gradient"
+                        : "text-gray-700 hover:text-gradient"
                     )}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
