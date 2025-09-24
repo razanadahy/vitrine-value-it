@@ -48,7 +48,7 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {NAVIGATION.map((item) => {
-              const isActive = pathname === item.href
+              const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href))
               return (
                 <Link
                   key={item.name}
@@ -56,8 +56,8 @@ export default function Header() {
                   className={cn(
                     "font-medium transition-colors duration-200 relative group",
                     isActive
-                      ? "text-gradient"
-                      : "text-gray-700 hover:text-gradient"
+                      ? "text-orange-500"
+                      : "text-gray-700 hover:text-orange-500"
                   )}
                 >
                   {item.name}
@@ -107,7 +107,7 @@ export default function Header() {
           >
             <div className="px-4 py-6 space-y-4">
               {NAVIGATION.map((item) => {
-                const isActive = pathname === item.href
+                const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href))
                 return (
                   <Link
                     key={item.name}
@@ -115,8 +115,8 @@ export default function Header() {
                     className={cn(
                       "block py-2 font-medium transition-colors duration-200",
                       isActive
-                        ? "text-gradient"
-                        : "text-gray-700 hover:text-gradient"
+                        ? "text-orange-500"
+                        : "text-gray-700 hover:text-orange-500"
                     )}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >

@@ -21,7 +21,8 @@ export const NAVIGATION = [
   { name: "Accueil", href: "/" },
   { name: "Solutions", href: "/features" },
   { name: "Tarifs", href: "/pricing" },
-  { name: "À propos", href: "/about" }
+  { name: "À propos", href: "/about" },
+  { name: "Démo", href: "/demo" }
 ]
 
 // Features List
